@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 수학 숙제 해결사</title>
+    <style>
+        body {
+            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        p.description {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 120px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            resize: none;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .result-section {
+            margin-top: 30px;
+            display: none; /* 결과가 나오기 전에는 숨김 */
+        }
+        .result-box {
+            background-color: #e8f8f5;
+            padding: 20px;
+            border-left: 5px solid #1abc9c;
+            border-radius: 5px;
+            white-space: pre-wrap; /* 줄바꿈 유지 */
+        }
+        .loading {
+            text-align: center;
+            display: none;
+            color: #3498db;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📐 AI 수학 숙제 해결사</h1>
+        <p class="description">풀리지 않는 수학 문제를 입력해주세요. 풀이 과정과 정답을 알려드립니다!</p>
+
+        <div class="input-group">
+            <textarea id="mathProblem" placeholder="예: 2x + 5 = 15 일 때, x의 값을 구하시오."></textarea>
+            <button onclick="solveProblem()">문제 풀기</button>
+        </div>
+
+        <div class="loading" id="loadingText">문제를 분석하고 풀이하는 중입니다... ⏳</div>
+
+        <div class="result-section" id="resultSection">
+            <h3>💡 풀이 결과</h3>
+            <div class="result-box" id="resultBox">
+                <!-- 결과가 여기에 표시됩니다. -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function solveProblem() {
+            const problem = document.getElementById('mathProblem').value;
+            const loadingText = document.getElementById('loadingText');
+            const resultSection = document.getElementById('resultSection');
+            const resultBox = document.getElementById('resultBox');
+
+            if (problem.trim() === '') {
+                alert('수학 문제를 입력해주세요!');
+                return;
+            }
+
+            // UI 초기화 (로딩 표시)
+            resultSection.style.display = 'none';
+            loadingText.style.display = 'block';
+
+            // 실제 서버 통신을 시뮬레이션 하기 위한 딜레이 (2초 후 결과 표시)
+            setTimeout(() => {
+                loadingText.style.display = 'none';
+                resultSection.style.display = 'block';
+
+                // 임시 결과 출력 (실제로는 이 부분에 서버에서 받아온 데이터를 넣어야 합니다)
+                resultBox.innerHTML = `입력하신 문제: <strong>${problem}</strong>\n\n` +
+                                      `[풀이 과정]\n` +
+                                      `이 부분은 백엔드 API와 연결되어 실제 풀이 과정이 출력될 공간입니다.\n\n` +
+                                      `정답: 백엔드 연결 필요`;
+            }, 2000);
+        }
+    </script>
+
+</body>
+</html>
